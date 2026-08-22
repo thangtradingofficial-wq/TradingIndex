@@ -1,0 +1,8 @@
+.env
+.env.*
+node_modules/
+scripts/obf-tools/node_modules/
+deploy/
+*.log
+.DS_Store
+Thumbs.db

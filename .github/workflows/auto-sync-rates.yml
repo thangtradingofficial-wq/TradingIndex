@@ -1,0 +1,44 @@
+name: Monthly Macro & Rates Auto-Sync (1 Tháng / Lần)
+
+on:
+  schedule:
+    # Chạy tự động vào 02:00 UTC Ngày 1 hàng tháng (tức 09:00 Sáng giờ Việt Nam)
+    - cron: '0 2 1 * *'
+  workflow_dispatch: # Nút bấm chạy thủ công bất kỳ lúc nào trên giao diện GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  monthly-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: 1. Fetch live quotes & Commit directly to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: node scripts/sync-hf-rates.mjs
+
+      - name: 2. Commit & Push updated data back to GitHub Repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit on GitHub"
+          else
+            git commit -m "Auto-update monthly macro data [$(date +'%Y-%m-01')] [skip ci]"
+            git push
+          fi

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Biểu đồ so sánh lãi suất 10 Ngân hàng Trung ương lớn trên thế giới — TradingView Edition">
+  <meta name="theme-color" content="#ffffff">
+  <title>Central Bank Policy Rates Comparison — TradingView</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  
+  <!-- Premium Fonts: Be Vietnam Pro + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=20260822_ios">
+  
+  <script>
+    // Clean any stale service workers or caches
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(r => r.forEach(reg => reg.unregister()));
+    }
+    if ('caches' in window) {
+      caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+    }
+  </script>
+</head>
+<body class="light-theme">
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" role="status" aria-label="Đang nạp dữ liệu Lãi suất">
+    <div class="tv-loading-card">
+      <div class="tv-loading-logo">
+        <svg class="tv-logo-svg" viewBox="0 0 36 28" width="36" height="28" fill="currentColor">
+          <path d="M14 22H7V11H14V22ZM21 22H14V6H21V22ZM28 22H21V0H28V22Z"/>
+        </svg>
+        <span class="tv-loading-brand">TradingView</span>
+      </div>
+      <div class="tv-loading-title">Central Bank Policy Rates</div>
+      <div class="tv-loading-bar-wrap">
+        <div class="tv-loading-bar" id="ls-progress-bar"></div>
+      </div>
+      <div class="tv-loading-status" id="ls-status-text">Đang nạp dữ liệu lịch sử 10 Ngân hàng Trung ương (1990 - nay)...</div>
+    </div>
+  </div>
+
+  <!-- Ambient Liquid Glass Backdrop Orbs -->
+  <div class="ios-ambient-backdrop" aria-hidden="true">
+    <div class="glass-orb glass-orb-1"></div>
+    <div class="glass-orb glass-orb-2"></div>
+    <div class="glass-orb glass-orb-3"></div>
+    <div class="glass-orb glass-orb-4"></div>
+  </div>
+
+  <!-- Main TradingView Window Layout -->
+  <div id="app">
+
+    <!-- Top TradingView Header Bar: Macro Indicators & Actions -->
+    <header id="top-bar" role="toolbar" aria-label="Thanh chỉ số vĩ mô"></header>
+
+    <!-- Main Chart Canvas Viewport (100% Full Width) -->
+    <main id="main-area">
+      <div id="chart-wrap">
+        <!-- Lightweight Charts Canvas (Full Width 100%) -->
+        <div id="chart-container" aria-label="Biểu đồ phân tích kinh tế vĩ mô"></div>
+
+        <!-- Floating Left Country Pills Dock (Pure Floating 50% Glass, No Box Background) -->
+        <div id="left-flag-dock" role="navigation" aria-label="Bật tắt quốc gia"></div>
+
+        <!-- Overlaid Container for Cursor Follower Tooltip & Right Badges -->
+        <div id="overlay-container"></div>
+      </div>
+    </main>
+
+    <!-- Bottom TradingView Bar: Range Selectors & UTC+7 clock -->
+    <footer id="tv-bottom-bar" role="contentinfo" aria-label="Thanh chọn khoảng thời gian"></footer>
+
+  </div>
+
+  <script type="module" src="./app.js?v=20260822_ios"></script>
+</body>
+</html>

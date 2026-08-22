@@ -1,0 +1,1331 @@
+/**
+ * style.css — Central Bank Policy Rates Comparison Terminal
+ * Luxury iOS Liquid Glass / Glassmorphism Edition
+ * Features: Ambient Liquid Mesh Backdrop, Frosted Glass Panels, Specular Highlights, iOS Capsules & Widgets
+ */
+
+/* ─── CSS Reset & Base Setup ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --font-main: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, Menlo, monospace;
+
+  /* ── Light Theme: iOS Liquid Glass ── */
+  --body-bg: #f4f6fb;
+  --glass-surface: rgba(255, 255, 255, 0.65);
+  --glass-surface-elevated: rgba(255, 255, 255, 0.82);
+  --glass-surface-card: rgba(255, 255, 255, 0.76);
+  --glass-surface-hover: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-border-subtle: rgba(0, 0, 0, 0.07);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.03);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --glass-shadow-lg: 0 16px 48px 0 rgba(31, 38, 135, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --glass-blur: blur(28px) saturate(190%);
+  --glass-blur-heavy: blur(36px) saturate(210%);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent-color: #007aff;
+  --accent-hover: #0062cc;
+  --accent-glow: rgba(0, 122, 255, 0.25);
+  --color-up: #089981;
+  --color-down: #f23645;
+
+  /* Ambient Mesh Orbs - Light */
+  --orb-1: rgba(56, 189, 248, 0.28); /* Cyan / Sky */
+  --orb-2: rgba(99, 102, 241, 0.22); /* Indigo */
+  --orb-3: rgba(244, 114, 182, 0.20); /* Rose Pink */
+  --orb-4: rgba(52, 211, 153, 0.22); /* Emerald */
+}
+
+body.dark-theme {
+  /* ── Dark Theme: iOS Deep Space Liquid Glass ── */
+  --body-bg: #090c13;
+  --glass-surface: rgba(18, 24, 38, 0.65);
+  --glass-surface-elevated: rgba(28, 36, 54, 0.82);
+  --glass-surface-card: rgba(22, 30, 48, 0.78);
+  --glass-surface-hover: rgba(36, 46, 68, 0.90);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-subtle: rgba(255, 255, 255, 0.06);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
+  --glass-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --glass-shadow-lg: 0 20px 56px 0 rgba(0, 0, 0, 0.65), 0 4px 16px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(28px) saturate(190%);
+  --glass-blur-heavy: blur(36px) saturate(210%);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --accent-color: #0a84ff;
+  --accent-hover: #409cff;
+  --accent-glow: rgba(10, 132, 255, 0.35);
+  --color-up: #10b981;
+  --color-down: #f43f5e;
+
+  /* Ambient Mesh Orbs - Dark */
+  --orb-1: rgba(37, 99, 235, 0.32); /* Electric Blue */
+  --orb-2: rgba(139, 92, 246, 0.26); /* Cosmic Purple */
+  --orb-3: rgba(236, 72, 153, 0.22); /* Magenta */
+  --orb-4: rgba(14, 165, 233, 0.26); /* Deep Cyan */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-main);
+  background-color: var(--body-bg);
+  color: var(--text-primary);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ─── Ambient Liquid Mesh Backdrop Orbs ────────────────────────────────────── */
+.ios-ambient-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glass-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.9;
+  transition: background 0.5s ease;
+  will-change: transform;
+}
+
+.glass-orb-1 {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: 10%;
+  background: var(--orb-1);
+  animation: floatOrb1 20s ease-in-out infinite alternate;
+}
+
+.glass-orb-2 {
+  width: 520px;
+  height: 520px;
+  top: 20%;
+  right: -100px;
+  background: var(--orb-2);
+  animation: floatOrb2 24s ease-in-out infinite alternate;
+}
+
+.glass-orb-3 {
+  width: 440px;
+  height: 440px;
+  bottom: -100px;
+  left: 25%;
+  background: var(--orb-3);
+  animation: floatOrb3 22s ease-in-out infinite alternate;
+}
+
+.glass-orb-4 {
+  width: 400px;
+  height: 400px;
+  bottom: 25%;
+  left: -120px;
+  background: var(--orb-4);
+  animation: floatOrb4 26s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(60px, 80px) scale(1.12); }
+  100% { transform: translate(-40px, 40px) scale(0.95); }
+}
+
+@keyframes floatOrb2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-80px, 60px) scale(1.08); }
+  100% { transform: translate(40px, -50px) scale(0.92); }
+}
+
+@keyframes floatOrb3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(70px, -70px) scale(1.15); }
+  100% { transform: translate(-50px, -30px) scale(0.90); }
+}
+
+@keyframes floatOrb4 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(50px, -60px) scale(1.06); }
+  100% { transform: translate(90px, 30px) scale(1.14); }
+}
+
+/* ─── App Container ───────────────────────────────────────────────────────── */
+#app {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── Loading Screen (iOS Frosted Sheet) ──────────────────────────────────── */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+}
+
+.tv-loading-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--glass-surface-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg), var(--glass-specular);
+  padding: 36px 48px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.tv-loading-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-color);
+}
+
+.tv-loading-brand {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  color: var(--text-primary);
+}
+
+.tv-loading-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.tv-loading-bar-wrap {
+  width: 220px;
+  height: 5px;
+  background: var(--glass-border-subtle);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.tv-loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(90deg, var(--accent-color), #60a5fa);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: loadingAnim 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes loadingAnim {
+  0%   { left: -50%; width: 50%; }
+  50%  { left: 30%; width: 45%; }
+  100% { left: 100%; width: 50%; }
+}
+
+.tv-loading-status {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── Top Header Bar (iOS Floating Glass Header) ─────────────────────────── */
+#top-bar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  user-select: none;
+  z-index: 100;
+  gap: 12px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.tv-tb-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+.tv-tb-left::-webkit-scrollbar { display: none; }
+
+.tv-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 4px 10px 4px 6px;
+  background: var(--glass-surface-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  box-shadow: var(--glass-specular);
+}
+
+.tv-logo-svg {
+  color: var(--accent-color);
+  filter: drop-shadow(0 2px 6px var(--accent-glow));
+}
+
+.tv-brand-titles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tv-brand-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.tv-timeframe-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  background: var(--accent-glow);
+  color: var(--accent-color);
+  padding: 1.5px 6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 122, 255, 0.2);
+}
+
+/* ─── Indicator Switcher Dock in Header (Horizontal Segmented Pills) ─────── */
+.tv-indicator-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 5px;
+  background: rgba(255, 255, 255, 0.40);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 9999px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03), var(--glass-specular);
+  flex-shrink: 0;
+}
+
+.tv-ind-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.tv-ind-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.tv-ind-tab.active {
+  background: var(--accent-color);
+  color: #ffffff;
+  font-weight: 700;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px var(--accent-glow), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.tv-ind-tab:active {
+  transform: scale(0.96);
+}
+
+.tv-ind-icon {
+  font-size: 13px;
+}
+
+.dark-theme .tv-indicator-dock {
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.dark-theme .tv-ind-tab:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* ─── Floating Left Country Dock (Zero Box Background - Pure Floating) ───── */
+#left-flag-dock {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 40;
+  pointer-events: none;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.tv-flags-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: auto;
+}
+
+.tv-flag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px 0 6px;
+  border-radius: 9999px; /* iOS Full Capsule Pill */
+  /* Nền trong suốt 50% */
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid var(--line-c);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tv-flag-pill:hover {
+  background: rgba(255, 255, 255, 0.70);
+  transform: translateX(2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tv-flag-pill:active {
+  transform: scale(0.96);
+}
+
+.tv-flag-pill.active {
+  background: color-mix(in srgb, var(--line-c) 15%, rgba(255, 255, 255, 0.50));
+  border-color: var(--line-c);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--line-c) 25%, transparent), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.tv-flag-pill.inactive {
+  opacity: 0.35;
+  filter: grayscale(85%);
+  border-color: rgba(180, 180, 180, 0.3);
+  background: rgba(255, 255, 255, 0.20);
+  box-shadow: none;
+}
+
+.tv-flag-pill.inactive:hover {
+  opacity: 0.75;
+  filter: none;
+}
+
+.tv-flag-icon {
+  width: 17px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 2.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.tv-flag-name {
+  font-family: var(--font-main);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--line-c);
+}
+
+.tv-flag-rate {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.tv-flag-pill.inactive .tv-flag-rate {
+  color: var(--text-muted);
+}
+
+.tv-flag-all-btn {
+  border-color: rgba(150, 150, 150, 0.35);
+  justify-content: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.tv-flag-all-btn .tv-flag-name {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.tv-flag-all-icon {
+  font-size: 13px;
+}
+
+/* Dark Theme Overrides for Floating Country Dock */
+.dark-theme .tv-flag-pill {
+  background: rgba(20, 26, 40, 0.45); /* Dark 50% Glass */
+  border-color: var(--line-c);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .tv-flag-pill:hover {
+  background: rgba(40, 50, 75, 0.65);
+}
+
+.dark-theme .tv-flag-pill.active {
+  background: color-mix(in srgb, var(--line-c) 25%, rgba(20, 26, 40, 0.50));
+  border-color: var(--line-c);
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--line-c) 40%, transparent);
+}
+
+.dark-theme .tv-flag-pill.inactive {
+  background: rgba(15, 20, 30, 0.20);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+.dark-theme .tv-flag-rate {
+  color: #ffffff;
+}
+
+.dark-theme .tv-flag-all-btn {
+  background: rgba(20, 26, 40, 0.35);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Header Right Controls (iOS Glass Buttons) ──────────────────────────── */
+.tv-tb-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.tv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 9999px; /* Capsule */
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  background: var(--glass-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text-primary);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  box-shadow: var(--glass-specular);
+}
+
+.tv-btn:hover {
+  background: var(--glass-surface-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), var(--glass-specular);
+}
+
+.tv-btn:active {
+  transform: scale(0.96);
+}
+
+.tv-btn-subtle {
+  border-color: var(--glass-border);
+}
+
+.tv-btn-primary {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px var(--accent-glow), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.tv-btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent-color));
+  box-shadow: 0 6px 18px var(--accent-glow), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.tv-theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  box-shadow: var(--glass-specular);
+}
+
+.tv-theme-toggle-btn:hover {
+  background: var(--glass-surface-hover);
+  transform: translateY(-1px);
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tv-theme-toggle-btn:active {
+  transform: scale(0.96);
+}
+
+.spin-anim {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Main Chart Viewport ─────────────────────────────────────────────────── */
+#main-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+#chart-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#chart-container {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+}
+
+#overlay-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ─── Pulsing End Dots (Live Glow Dots at the Tip of Each Series Line) ───── */
+.tv-end-dots-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 18;
+  overflow: hidden;
+}
+
+.tv-end-pulse-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--dot-color);
+  border: 1.5px solid #ffffff;
+  pointer-events: none;
+  box-shadow: 0 0 8px var(--dot-color);
+  will-change: transform;
+}
+
+.tv-end-pulse-dot::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--dot-color);
+  opacity: 0.7;
+  animation: pulseDotAnim 2s cubic-bezier(0.2, 0.9, 0.4, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseDotAnim {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* ─── Right End Badges (iOS Frosted Glass Colored Badges) ─────────────────── */
+.tv-end-badges-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.tv-end-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 28px;
+  padding: 0 10px 0 6px;
+  border-radius: 8px;
+  background: var(--b-color);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  user-select: none;
+  font-family: var(--font-main);
+  transition: transform 0.05s ease-out;
+}
+
+.tv-eb-flag {
+  width: 18px;
+  height: 13px;
+  object-fit: cover;
+  border-radius: 2.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.tv-eb-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.tv-eb-val {
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  padding-left: 2px;
+}
+
+/* ─── Cursor-Following Floating Tooltip (iOS Liquid Card) ─────────────────── */
+.tv-cursor-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+  background: var(--glass-surface-card);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow-lg), var(--glass-specular);
+  padding: 10px 14px;
+  min-width: 250px;
+  user-select: none;
+  transition: opacity 0.15s ease, transform 0.08s ease-out;
+}
+
+.tv-ct-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.tv-ct-date-icon {
+  font-size: 13px;
+}
+
+.tv-ct-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tv-ct-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 11.5px;
+  padding: 2px 0;
+  border-radius: 6px;
+}
+
+.tv-ct-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.tv-ct-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--c-dot);
+}
+
+.tv-ct-flag-img {
+  width: 16px;
+  height: 11px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.tv-ct-ticker {
+  font-family: var(--font-main);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.tv-ct-name {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.tv-ct-val {
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Bottom Range Bar (iOS Floating Control Dock) ───────────────────────── */
+#tv-bottom-bar {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border-subtle);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  user-select: none;
+  z-index: 10;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.tv-bb-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tv-brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.tv-logo-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* iOS Segmented Control Pills */
+.tv-range-pills {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  background: var(--glass-border-subtle);
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border-subtle);
+}
+
+.tv-range-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tv-range-btn:hover {
+  color: var(--text-primary);
+}
+
+.tv-range-btn.active {
+  background: var(--glass-surface-elevated);
+  color: var(--accent-color);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10), var(--glass-specular);
+}
+
+.tv-bb-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tv-updated-at {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding-right: 4px;
+  cursor: default;
+  transition: color 0.2s ease;
+}
+.tv-updated-at:hover {
+  color: var(--text-secondary);
+}
+
+.tv-clock-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tv-clock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-up);
+  box-shadow: 0 0 8px var(--color-up);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%   { opacity: 0.4; transform: scale(0.9); }
+  50%  { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.tv-clock-text {
+  font-family: var(--font-main);
+  font-size: 11.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.tv-scale-toggles {
+  display: flex;
+  align-items: center;
+}
+
+.tv-scale-btn {
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--glass-specular);
+}
+
+.tv-scale-btn.active {
+  background: var(--accent-glow);
+  color: var(--accent-color);
+  border-color: rgba(0, 122, 255, 0.3);
+}
+
+/* ─── Toast Notifications (iOS Island Banner) ────────────────────────────── */
+.tv-toast {
+  position: fixed;
+  bottom: 58px;
+  right: 20px;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 9999px; /* iOS Capsule */
+  font-family: var(--font-main);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--glass-surface-card);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg), var(--glass-specular);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tv-toast.tv-toast-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.tv-toast.tv-toast-success {
+  border-color: rgba(16, 185, 129, 0.4);
+  color: var(--color-up);
+}
+
+.tv-toast.tv-toast-info {
+  border-color: var(--glass-border);
+  color: var(--text-primary);
+}
+
+.tv-toast.tv-toast-error {
+  border-color: rgba(244, 63, 94, 0.4);
+  color: var(--color-down);
+}
+
+/* ─── Modal Dialogs (iOS Liquid Glass Modals) ────────────────────────────── */
+.tv-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 20px;
+}
+
+.tv-modal-overlay.tv-modal-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tv-modal-card {
+  background: var(--glass-surface-card);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3), var(--glass-specular);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tv-modal-overlay.tv-modal-visible .tv-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.tv-modal-large {
+  max-width: 960px;
+}
+
+.tv-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.tv-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tv-modal-icon {
+  font-size: 18px;
+}
+
+.tv-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.tv-modal-close:hover {
+  background: var(--glass-border-subtle);
+  color: var(--text-primary);
+}
+
+.tv-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.tv-modal-desc {
+  margin: 0 0 16px 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.tv-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--glass-border-subtle);
+  background: var(--glass-surface);
+}
+
+/* Spread Selectors */
+.tv-spread-selectors {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.tv-spread-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tv-spread-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.tv-spread-select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--glass-surface-elevated);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 12.5px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.tv-spread-operator {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent-color);
+  padding-top: 18px;
+}
+
+.tv-spread-stat {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.tv-spread-result-card {
+  background: var(--glass-surface-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+}
+
+.tv-spread-res-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.tv-spread-res-val {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.tv-spread-res-val.pos {
+  color: var(--color-up);
+}
+
+.tv-spread-res-val.neg {
+  color: var(--color-down);
+}
+
+.tv-spread-res-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Macro Matrix Table */
+.tv-matrix-table-wrap {
+  overflow-x: auto;
+}
+
+.tv-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.tv-matrix-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border-bottom: 1.5px solid var(--glass-border);
+  white-space: nowrap;
+}
+
+.tv-matrix-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.tv-matrix-country {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+
+.tv-matrix-flag {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.tv-matrix-c-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.tv-matrix-c-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tv-matrix-c-inst {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.tv-matrix-cell {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tv-matrix-val {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tv-matrix-chg {
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.tv-matrix-chg.text-pos {
+  color: var(--color-up);
+}
+
+.tv-matrix-chg.text-neg {
+  color: var(--color-down);
+}
+
+.tv-matrix-chg.text-neutral {
+  color: var(--text-muted);
+}
+
+.tv-matrix-note {
+  flex: 1;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
